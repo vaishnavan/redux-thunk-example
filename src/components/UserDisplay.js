@@ -7,23 +7,30 @@ function UserDisplay(props) {
     props.getService();
   }, []);
 
-  console.log(props.mydata);
+  console.log(props.loadingData);
 
-  return <></>;
+  return (
+    <>
+      {props.loadingData && <h1>loading...</h1>}
+      {props.mydata &&
+        props.mydata.map((data) => {
+          return (
+            <div key={data.id}>
+              <h1>{data.username}</h1>
+            </div>
+          );
+        })}
+    </>
+  );
 }
 
 const mapStateToProps = (state) => {
   console.log(state.apiReducer);
-  // return {
-  //   mydata: state.apiReducer.message
-  // }
+  return {
+    mydata: state.apiReducer.message,
+    loadingData: state.apiReducer.loading
+  };
 };
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     apiCall: () => dispatch(addActionData())
-//   };
-// };
 
 const mapDispatchToProps = (dispatch) => {
   return {

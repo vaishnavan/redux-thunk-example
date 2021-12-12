@@ -14,6 +14,7 @@ const reducer = (state = initialState, action) => {
     case "ADD_DATA_SUCCESS":
       return {
         ...state,
+        loading: false,
         message: action.payload,
         error: ""
       };
@@ -21,6 +22,7 @@ const reducer = (state = initialState, action) => {
     case "ADD_DATA_FAILURE":
       return {
         ...state,
+        loading: false,
         message: [],
         error: action.payload
       };

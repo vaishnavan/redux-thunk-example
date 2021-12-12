@@ -20,13 +20,16 @@ export const addDataFailure = (error) => {
   };
 };
 
-export const addActionData = async () => {
-  return async (dispatch) => {
-    console.log("hello dispatch");
-    return axios
+export const addActionData = () => {
+  return (dispatch) => {
+    dispatch(addDataPending());
+    axios
       .get("https://jsonplaceholder.typicode.com/users")
       .then((res) => {
-        console.log("hello check" + res.data);
+        dispatch(addDataSuccess(res.data));
+      })
+      .catch((err) => {
+        dispatch(addDataFailure(err));
       });
   };
 };
